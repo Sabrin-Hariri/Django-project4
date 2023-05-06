@@ -1,0 +1,78 @@
+{% extends 'bookstore/main.html' %}
+    
+{% block content %}
+
+
+<h1 class="p-5">Customer</h1>
+
+<hr>
+<div class="container pb-5">
+  <div class="row">
+    <div class= "col-sm">
+    <form class="form-inline my-2 my-lg-0" method="GET">
+      {{searchfilter.form}}
+       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+     </form>
+    </div>
+  </div>
+</div>
+
+</hr>
+  
+<div class="container pb-5">
+  <div class="row">
+  <div class= "col-sm">
+<a href="{% url 'create' reqcustomer.id  %}">Create Order</a>
+{% comment %} <a href="{% url 'create' reqcustomer.id  %}">Create Order</a> {% endcomment %}
+  </div>
+    </div>
+      </div>
+  
+ <div class="container pb-5">
+<div class="row">
+<div class= "col-sm">
+ Name: {{reqcustomer.name}}
+</div>
+<div class= "col-sm">
+ Email: {{reqcustomer.email}}
+</div>
+<div class= "col-sm">
+  Phone: {{reqcustomer.phone}}
+</div>
+<div class= "col-sm">
+  Number of orders: {{num_order}}
+</div>
+  </div>
+    </div>
+  <div class="container">
+    <table class="table">
+      <thead class="thead-dark">
+        <tr> 
+          <th scope="col">book</th>
+          <th scope="col">category</th>
+          <th scope="col">Date</th>
+          <th scope="col">status</th>
+          <th scope="col">Action</th>
+        </tr>
+        
+      </thead>
+      <tbody>
+      
+          {% for item in reqorder  %}
+            <tr>
+          <td>{{item.book}}</td>
+          <td>{{item.book.category}}</td>
+          <td>{{item.date_created}}</td>
+          <td>{{item.status}}</td>
+          <td>
+            <a href="{% url 'update' item.id  %}"><i class="fas fa-edit"></i></a>
+            <a class="text-danger" href="{% url 'delete' item.id  %}"><i class="fas fa-trash-alt"></i></a>
+            </td>
+          </tr>  
+          {% endfor %}
+       
+      </tbody>
+    </table>
+  </div>    </div>
+
+{% endblock %}
